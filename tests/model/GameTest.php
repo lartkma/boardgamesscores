@@ -14,4 +14,27 @@ class ModelTest extends TestCase {
         $this->assertEquals('Carcassonne', $carcassonne->name);
     }
 
+    public function testGamePointsStructure(){
+        $game = Game::where('name', 'Carcassonne')->firstOrFail();
+        $this->assertCount(1, $game->game_points);
+        $this->assertEquals(['Points'], 
+            $this->pluck($game->game_points-> sortBy('order')->toArray(), 'label'));
+        $this->assertFalse($game->game_points->get(0)->is_negative);
+
+        $game = Game::where('name', 'Power Grid')->firstOrFail();
+        $this->assertCount(3, $game->game_points);
+        $this->assertEquals(['Supplied cities', 'Cash', 'Cities'], 
+            $this->pluck($game->game_points-> sortBy('order')->toArray(), 'label'));
+
+        $game = Game::where('name', 'No Thanks!')->firstOrFail();
+        $this->assertCount(1, $game->game_points);
+        $this->assertEquals(['Points'], 
+            $this->pluck($game->game_points-> sortBy('order')->toArray(), 'label'));
+        $this->assertTrue($game->game_points->get(0)->is_negative);
+    }
+
+    private function pluck($array, $key){
+        return Illuminate\Support\Arr::pluck($array, $key);
+    }
+
 }
