@@ -12,4 +12,8 @@ class MatchPlayerScore extends Model {
         return $this->belongsTo('BoardGameScores\Player');
     }
 
+    public function points(){
+        return $this->hasMany('BoardGameScores\MatchPlayerScorePoint');
+    }
+
 }

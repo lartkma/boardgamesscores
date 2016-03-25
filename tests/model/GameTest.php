@@ -17,6 +17,7 @@ class ModelTest extends TestCase {
     public function testGamePointsStructure(){
         $game = Game::where('name', 'Carcassonne')->firstOrFail();
         $this->assertCount(1, $game->game_points);
+        $this->assertEquals('Points', $game->game_points[0]->label);
         $this->assertEquals(['Points'], 
             $this->pluck($game->game_points-> sortBy('order')->toArray(), 'label'));
         $this->assertFalse($game->game_points->get(0)->is_negative);
