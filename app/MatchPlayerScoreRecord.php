@@ -1,6 +1,7 @@
 <?php namespace BoardGameScores;
 
 use \DB;
+use Illuminate\Support\Collection;
 
 class MatchPlayerScoreRecord {
 
@@ -12,6 +13,19 @@ class MatchPlayerScoreRecord {
         $this->inner_id = $id;
         $this->score = $score;
         $this->point_order = $point_order;
+    }
+
+    public static function getRecords(){
+        $collection = new Collection;
+        $records = DB::table('match_player_score_records')->get();
+        foreach($records as $record_row){
+            $collection->push(new MatchPlayerScoreRecord(
+                $record_row->id,
+                MatchPlayerScore::find($record_row->match_player_score_id),
+                $record_row->point_order
+            ));
+        }
+        return $collection;
     }
 
     public static function getRecordByGame($game_or_id, $number_players){

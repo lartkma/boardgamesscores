@@ -67,17 +67,41 @@ class RecordOperationTest extends TestCase {
         $game->points()->saveMany($gamedef->buildScorePoints([10]));
         $game->checkAndSaveForRecord();
 
-        $record = Records::getRecordByGame(1, 4);
-        $this->assertEquals(2, $record->score->player->id);
+        $records = Records::getRecords();
 
-        $record = Records::getRecordByGame(1, 5);
-        $this->assertEquals(1, $record->score->player->id);
+        $this->assertCount(4, $records);
 
-        $record = Records::getRecordByGame(2, 5);
-        $this->assertEquals(1, $record->score->player->id);
+        $this->assertCount(1, $records->filter(function($element){
+            return $element->score->game->name == "Carcassonne" &&
+                $element->score->number_players == 4 &&
+                $element->score->player->id == 2 &&
+                $element->score->points[0]->value == 62 &&
+                $element->point_order == 1;
+        }));
 
-        $record = Records::getRecordByGame(3, 4);
-        $this->assertEquals(2, $record->score->player->id);
+        $this->assertCount(1, $records->filter(function($element){
+            return $element->score->game->name == "Carcassonne" &&
+                $element->score->number_players == 5 &&
+                $element->score->player->id == 1 &&
+                $element->score->points[0]->value == 65 &&
+                $element->point_order == 1;
+        }));
+
+        $this->assertCount(1, $records->filter(function($element){
+            return $element->score->game->name == "Power Grid" &&
+                $element->score->number_players == 5 &&
+                $element->score->player->id == 1 &&
+                $element->score->points[0]->value == 15 &&
+                $element->point_order == 3;
+        }));
+
+        $this->assertCount(1, $records->filter(function($element){
+            return $element->score->game->name == "No Thanks!" &&
+                $element->score->number_players == 4 &&
+                $element->score->player->id == 2 &&
+                $element->score->points[0]->value == 10 &&
+                $element->point_order == 1;
+        }));
     }
 
     private function buildMatchPlayerScore($gamedef, $player_id, $number_players){
