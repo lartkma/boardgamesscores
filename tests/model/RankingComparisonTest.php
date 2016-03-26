@@ -90,6 +90,19 @@ class RankingComparisonTest extends TestCase {
         $this->assertEquals( 3, $game2->compareForRanking($game1));
     }
 
+    public function testMultiplePointsIncompleteSame(){
+        $gamedef = Game::where('name', 'Power Grid')->firstOrFail();
+
+        $game1 = $this->buildMatchPlayerScore($gamedef, 1, 4);
+        $game1->points()->saveMany($gamedef->buildScorePoints([15, 90]));
+
+        $game2 = $this->buildMatchPlayerScore($gamedef, 2, 4);
+        $game2->points()->saveMany($gamedef->buildScorePoints([15, 90]));
+
+        $this->assertEquals(0, $game1->compareForRanking($game2));
+        $this->assertEquals(0, $game2->compareForRanking($game1));
+    }
+
     private function buildMatchPlayerScore($gamedef, $player_id, $number_players){
         $game = new MatchPlayerScore;
         $game->game()->associate($gamedef);
