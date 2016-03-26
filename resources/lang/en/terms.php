@@ -6,4 +6,5 @@ return [
     'numplayers' => '# Players',
     'player' => 'Player',
     'record' => 'Record',
+    'add' => 'Add new',
 ];

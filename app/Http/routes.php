@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'RecordsController@board');
+
+Route::get('game/add', 'GameController@create');
+Route::post('game', 'GameController@store');

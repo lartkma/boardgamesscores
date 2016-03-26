@@ -145,6 +145,10 @@ return [
 		'BoardGameScores\Providers\EventServiceProvider',
 		'BoardGameScores\Providers\RouteServiceProvider',
 
+        /*
+         * Contributed Service Providers...
+         */
+        'Collective\Html\HtmlServiceProvider',
 	],
 
 	/*
@@ -191,8 +195,11 @@ return [
 		'Storage'   => 'Illuminate\Support\Facades\Storage',
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
-		'View'      => 'Illuminate\Support\Facades\View',
+        'View'      => 'Illuminate\Support\Facades\View',
 
+        // Contributed
+        'Form' => 'Collective\Html\FormFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
 	],
 
 ];
