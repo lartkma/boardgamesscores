@@ -38,4 +38,14 @@ class ModelTest extends TestCase {
         return Illuminate\Support\Arr::pluck($array, $key);
     }
 
+    public function testBuildScorePoints(){
+        $game = Game::where('name', 'Power Grid')->firstOrFail();
+        $scorepoints = $game->buildScorePoints([15, 120]);
+        $this->assertCount(2, $scorepoints);
+        $this->assertEquals('Supplied cities', $scorepoints[0]->definition->label);
+        $this->assertEquals(15, $scorepoints[0]->value);
+        $this->assertEquals('Cash', $scorepoints[1]->definition->label);
+        $this->assertEquals(120, $scorepoints[1]->value);
+    }
+
 }
