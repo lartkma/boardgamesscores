@@ -24,7 +24,7 @@ class MatchPlayerScore extends Model {
             $is_a_record = true;
             $point_order = 1;
         }else{
-            $compare = $this->compareForRanking($current_record->score);
+            $compare = $this->compareForRecord($current_record->score);
             if($compare > 0){
                 $is_a_record = true;
                 $point_order = $compare;
@@ -36,7 +36,7 @@ class MatchPlayerScore extends Model {
         return $is_a_record;
     }
 
-    public function compareForRanking(MatchPlayerScore $other){
+    public function compareForRecord(MatchPlayerScore $other){
         $pointElements = $this->game->game_points->sortBy('order');
         foreach($pointElements as $element){
             $factor = ($element->is_negative ? -1 : 1);
