@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title', Lang::get('terms.recordboard'))
+@section('title', env('WEB_ORG_NAME').' - '.Lang::get('terms.recordboard'))
 @section('content')
     <div class="page-header clearfix">
-        <img class="pull-left" src="{{asset('images/logo.png')}}" />
+        <img class="pull-left" alt="{{env('WEB_ORG_NAME')}}" src="{{asset('images/logo.png')}}" />
         <h1 class="pull-right">@lang('terms.recordboard')</h1>
     </div>
     <div class="table-responsive">
