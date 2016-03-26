@@ -1,5 +1,6 @@
 <?php namespace BoardGameScores;
 
+use BoardGameScores\MatchPlayerScoreRecord as Records;
 use Illuminate\Database\Eloquent\Model;
 
 class MatchPlayerScore extends Model {
@@ -14,6 +15,25 @@ class MatchPlayerScore extends Model {
 
     public function points(){
         return $this->hasMany('BoardGameScores\MatchPlayerScorePoint');
+    }
+
+    public function checkAndSaveForRecord(){
+        $current_record = Records::getRecordByGame($this->game, $this->number_players);
+        $is_a_record = false;
+        if(is_null($current_record)){
+            $is_a_record = true;
+            $point_order = $this->maxOrder();
+        }else{
+            $compare = $this->compareForRanking($current_record->score);
+            if($compare > 0){
+                $is_a_record = true;
+                $point_order = $compare;
+            }
+        }
+        if($is_a_record){
+            Records::saveRecord($this, $point_order);
+        }
+        return $is_a_record;
     }
 
     public function compareForRanking(MatchPlayerScore $other){
@@ -43,6 +63,16 @@ class MatchPlayerScore extends Model {
             }
         }
         return 0;
+    }
+
+    private function maxOrder(){
+        $max = 1;
+        foreach($this->points as $point){
+            if($point->value > $max){
+                $max = $point->value;
+            }
+        }
+        return $max;
     }
 
 }
