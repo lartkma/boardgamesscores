@@ -17,9 +17,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 		return $app;
 	}
 
-    protected function setUpDatabase(){
+    protected function setUpDatabase($seederClass = 'DatabaseSeeder'){
         Artisan::call('migrate');
-        $this->seed();
+        $this->seed($seederClass);
     }
 
 }
