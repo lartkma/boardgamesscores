@@ -22,7 +22,7 @@ class MatchPlayerScore extends Model {
         $is_a_record = false;
         if(is_null($current_record)){
             $is_a_record = true;
-            $point_order = $this->maxOrder();
+            $point_order = 1;
         }else{
             $compare = $this->compareForRanking($current_record->score);
             if($compare > 0){
