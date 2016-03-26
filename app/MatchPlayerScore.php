@@ -33,8 +33,8 @@ class MatchPlayerScore extends Model {
                         ($element->order - 1) * $factor;
                 }
             }else{
-                $thisPoints = $thisPoints[0]->value;
-                $otherPoints = $otherPoints[0]->value;
+                $thisPoints = $thisPoints->first()->value;
+                $otherPoints = $otherPoints->first()->value;
                 if($thisPoints > $otherPoints){
                     return $element->order * $factor;
                 }else if($thisPoints < $otherPoints){
