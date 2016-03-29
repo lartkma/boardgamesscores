@@ -10,5 +10,10 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    @if(isset($add_js))
+    @foreach($add_js as $path)
+    <script src="{{$path}}"></script>
+    @endforeach
+    @endif
 </body>
 </html>

@@ -7,4 +7,5 @@ return [
     'player' => 'Player',
     'record' => 'Record',
     'add' => 'Add new',
+    'save' => 'Save',
 ];
