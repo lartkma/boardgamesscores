@@ -1,9 +1,11 @@
 <?php namespace BoardGameScores\Http\Controllers;
 
 use BoardGameScores\Http\Requests;
+use BoardGameScores\Http\Requests\StoreGameRequest;
 use BoardGameScores\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Lang;
 
 class GameController extends Controller {
 
@@ -30,8 +32,10 @@ class GameController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store() {
-		//
+    public function store(StoreGameRequest $req) {
+        $req->new_game()->save();
+        $req->new_game()->game_points()->saveMany($req->new_game_points());
+        return redirect('/')->withSuccess(Lang::get('games.success_message'));
 	}
 
 	/**

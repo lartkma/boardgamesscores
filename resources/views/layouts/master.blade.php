@@ -6,6 +6,18 @@
 </head>
 <body>
     <div class="container">
+        <div class="page-header clearfix">
+            @yield('header')
+        </div>
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{session('success')}}
+            </div>
+        @elseif(session()->has('errors'))
+            <div class="alert alert-danger">
+                {{print_r(session('errors'), true)}}
+            </div>
+        @endif
         @yield('content')
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

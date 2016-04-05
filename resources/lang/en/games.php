@@ -11,4 +11,5 @@ return [
     'header_tie_points' => 'Tie breaker points',
     'default_point_label' => 'Points',
     'label_is_negative' => 'Less points, the better',
+    'success_message' => 'Game saved successfully',
 ];

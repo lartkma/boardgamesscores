@@ -3,10 +3,10 @@
         [asset('js/handlebars.min.js'), asset('js/game-add.js')]
     ])       
 @section('title', Lang::get('games.title_new'))
+@section('header')
+    <h1>@lang('games.title_new')</h1>
+@stop
 @section('content')
-    <div class="page-header">
-        <h1>@lang('games.title_new')</h1>
-    </div>
     {!! Form::open(['url' => 'game']) !!}
     <fieldset>
         <legend>@lang('games.header_general')</legend>
