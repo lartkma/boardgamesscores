@@ -3,7 +3,8 @@
 class BGGService {
     
     public static function search($search_term){
-        $url = 'https://www.boardgamegeek.com/xmlapi/search?search='.rawurlencode($search_term);
+        $url = env('BGG_HOST', 'http://www.boardgamegeek.com').
+            '/xmlapi/search?search='.rawurlencode($search_term);
         $boardgames = simplexml_load_file($url);
         $results = [];
         foreach($boardgames->boardgame as $boardgame){
