@@ -15,3 +15,6 @@ Route::get('/', 'RecordsController@board');
 
 Route::get('game/add', 'GameController@create');
 Route::post('game', 'GameController@store');
+
+Route::get('bgg/search', 'BGGServiceController@search');
+Route::get('bgg/games/{game_id}', 'BGGServiceController@getGame');
