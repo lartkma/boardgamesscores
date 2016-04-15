@@ -15,4 +15,10 @@ class BGGServiceTest extends TestCase {
         $this->assertEquals(2000, $carcassonne[0]['year']);
     }
 
+    public function testGameDetail(){
+        $detail = BGGService::gameDetail(822);
+        $this->assertEquals(2, $detail['min_players']);
+        $this->assertEquals(5, $detail['max_players']);
+    }
+
 }

@@ -18,4 +18,17 @@ class BGGService {
         }
         return $results;
     }
+
+    public static function gameDetail($game_id){
+        $url = env('BGG_HOST', 'http://www.boardgamegeek.com').
+            '/xmlapi/boardgame/'.rawurlencode($game_id);
+        $boardgames = simplexml_load_file($url);
+        $boardgame = $boardgames->boardgame[0];
+        $result = [];
+        $result['min_players'] = isset($boardgame->minplayers) ?
+            intval($boardgame->minplayers) : 0;
+        $result['max_players'] = isset($boardgame->maxplayers) ?
+            intval($boardgame->maxplayers) : 0;
+        return $result;
+    }
 }
