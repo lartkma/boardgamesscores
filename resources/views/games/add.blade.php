@@ -7,7 +7,7 @@
     <h1>@lang('games.title_new')</h1>
 @stop
 @section('content')
-    {!! Form::open(['url' => 'game']) !!}
+    {!! Form::open(['url' => 'games']) !!}
     <fieldset>
         <legend>@lang('games.header_general')</legend>
         <div class="form-group">
