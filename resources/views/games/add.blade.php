@@ -1,12 +1,20 @@
 @extends('layouts.master', 
     ['add_js'=>
-        [asset('js/handlebars.min.js'), asset('js/game-add.js')]
-    ])       
+        [asset('js/handlebars.min.js'), asset('js/jquery-ui.min.js'), asset('js/game-add.js')],
+     'add_css'=>
+        [asset('css/jquery-ui.min.css')]
+    ])
 @section('title', Lang::get('games.title_new'))
 @section('header')
     <h1>@lang('games.title_new')</h1>
 @stop
 @section('content')
+    <style type="text/css">
+        .ui-autocomplete-loading {
+            background: url("../images/ajax-loader.gif") right center no-repeat;
+            background-origin: content-box;
+        }
+    </style>
     {!! Form::open(['url' => 'games']) !!}
     <fieldset>
         <legend>@lang('games.header_general')</legend>

@@ -3,6 +3,16 @@
 <head>
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
+    @if(isset($add_css))
+    @foreach($add_css as $path)
+    <link rel="stylesheet" href="{{$path}}" />
+    @endforeach
+    @endif
+    <script type="text/javascript">
+    var $_SERVER = {
+        root: '{{url('/')}}'
+    };
+    </script>
 </head>
 <body>
     <div class="container">
