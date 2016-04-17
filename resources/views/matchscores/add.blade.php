@@ -1,4 +1,9 @@
-@extends('layouts.master')
+@extends('layouts.master', 
+    ['add_js'=>
+        [asset('js/handlebars.min.js'), asset('js/jquery-ui.min.js'), asset('js/matchscore-add.js')],
+     'add_css'=>
+        [asset('css/jquery-ui.min.css')]
+    ])
 @section('title', Lang::get('matchscores.title_new'))
 @section('header')
     <h1>@lang('matchscores.title_new')</h1>
@@ -11,7 +16,7 @@
                 {!! Form::text('game', null, ['class'=>'form-control', 'required'=>'required']) !!}
                 <span class="input-group-btn">
                     <a class="btn btn-default" aria-label="{{Lang::get('matchscores.label_add_game')}}" 
-                            href="{{url('games/add?redirect=matchscores')}}" tabindex="-1">
+                            id="add-game-btn" href="{{url('games/add?redirect=matchscores')}}" tabindex="-1">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
                 </span>
@@ -24,7 +29,7 @@
                 {!! Form::text('player', null, ['class'=>'form-control', 'required'=>'required']) !!}
                 <span class="input-group-btn">
                     <a class="btn btn-default" aria-label="{{Lang::get('matchscores.label_add_player')}}" 
-                            href="{{url('players/add?redirect=matchscores')}}" tabindex="-1">
+                            id="add-player-btn" href="{{url('players/add?redirect=matchscores')}}" tabindex="-1">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
                 </span>

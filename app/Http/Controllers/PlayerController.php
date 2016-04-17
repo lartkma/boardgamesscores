@@ -3,6 +3,7 @@
 use BoardGameScores\Http\Requests;
 use BoardGameScores\Http\Requests\StorePlayerRequest;
 use BoardGameScores\Http\Controllers\Controller;
+use BoardGameScores\Player;
 
 use Illuminate\Http\Request;
 use Lang;
@@ -17,6 +18,15 @@ class PlayerController extends Controller {
     //public function index() {
 		//
 	//}
+
+    public function indexJSON(){
+        return Player::all()->map(function($item){
+            return [
+                'id' => $item->id,
+                'name' => $item->name,
+            ];
+        });
+    }
 
 	/**
 	 * Show the form for creating a new resource.

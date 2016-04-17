@@ -13,9 +13,11 @@
 
 Route::get('/', 'RecordsController@board');
 
+Route::get('games.json', 'GameController@indexJSON');
 Route::get('games/add', 'GameController@create');
 Route::post('games', 'GameController@store');
 
+Route::get('players.json', 'PlayerController@indexJSON');
 Route::get('players/add', 'PlayerController@create');
 Route::post('players', 'PlayerController@store');
 
