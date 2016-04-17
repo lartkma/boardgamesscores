@@ -7,19 +7,15 @@ $(function(){
         return array;
     }
 
-    function completeFormWithGame(id){
-        addPlayerBtn.attr('href', addPlayerLink+'&withGameId='+id);
-        //TODO
-    }
-
-    function completeFormWithPlayer(id){
-        addGameBtn.attr('href', addGameLink+'&withPlayerId='+id);
-    }
-
     var gamesInput = $('#game');
     var gamesIdInput = $('#game_id');
     var addGameBtn = $('#add-game-btn');
     var addGameLink = addGameBtn.attr('href');
+    var completeFormWithGame = function(id){
+        addPlayerBtn.attr('href', addPlayerLink+'&withGameId='+id);
+        //TODO
+    };
+
     if(gamesIdInput.val() !== ""){
         completeFormWithGame(gamesIdInput.val());
     }
@@ -31,14 +27,28 @@ $(function(){
                 gamesInput.val(ui.item.name);
                 gamesIdInput.val(ui.item.id);
                 completeFormWithGame(ui.item.id);
+            },
+            change: function(event, ui){
+                if(!ui.item){
+                    gamesInput.val('');
+                }
             }
         });
+    });
+    gamesInput.keydown(function(event){
+        if(event.keyCode == 13){
+            event.preventDefault();
+        }
     });
 
     var playersInput = $('#player');
     var playersIdInput = $('#player_id');
     var addPlayerBtn = $('#add-player-btn');
     var addPlayerLink = addPlayerBtn.attr('href');
+    var completeFormWithPlayer = function(id){
+        addGameBtn.attr('href', addGameLink+'&withPlayerId='+id);
+    };
+
     if(playersIdInput.val() !== ""){
         completeFormWithPlayer(playersIdInput.val());
     }
@@ -50,8 +60,18 @@ $(function(){
                 playersInput.val(ui.item.name);
                 playersIdInput.val(ui.item.id);
                 completeFormWithPlayer(ui.item.id);
+            },
+            change: function(event, ui){
+                if(!ui.item){
+                    playersInput.val('');
+                }
             }
         });
+    });
+    playersInput.keydown(function(event){
+        if(event.keyCode == 13){
+            event.preventDefault();
+        }
     });
 
 });

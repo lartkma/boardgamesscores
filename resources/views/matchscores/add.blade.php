@@ -41,7 +41,7 @@
             {!! Form::number('number_players', null, ['class'=>'form-control', 'min'=>1, 'required'=>'required']) !!}
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="@lang('terms.save')" />
+            <input id="save-matchscore" type="submit" class="btn btn-primary" value="@lang('terms.save')" />
         </div>
     {!! Form::close() !!}
 @stop
