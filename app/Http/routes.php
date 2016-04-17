@@ -19,5 +19,8 @@ Route::post('games', 'GameController@store');
 Route::get('players/add', 'PlayerController@create');
 Route::post('players', 'PlayerController@store');
 
+Route::get('matchscores/add', 'MatchPlayerScoreController@create');
+Route::post('matchscores', 'MatchPlayerScoreController@store');
+
 Route::get('bgg/search', 'BGGServiceController@search');
 Route::get('bgg/games/{game_id}', 'BGGServiceController@getGame');
