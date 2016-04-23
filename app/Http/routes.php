@@ -14,6 +14,7 @@
 Route::get('/', 'RecordsController@board');
 
 Route::get('games.json', 'GameController@indexJSON');
+Route::get('games/{id}.json', 'GameController@showJSON');
 Route::get('games/add', 'GameController@create');
 Route::post('games', 'GameController@store');
 

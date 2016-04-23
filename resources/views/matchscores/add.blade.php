@@ -40,8 +40,17 @@
             {!! Form::label('number_players', Lang::get('matchscores.label_number_players')) !!}
             {!! Form::number('number_players', null, ['class'=>'form-control', 'min'=>1, 'required'=>'required']) !!}
         </div>
+        <div id="game-points">
+        </div>
         <div class="form-group">
             <input id="save-matchscore" type="submit" class="btn btn-primary" value="@lang('terms.save')" />
         </div>
     {!! Form::close() !!}
+    <script id="template-game-point" type="text/x-handlebars-template">
+        <div class="form-group">
+            {!! Form::label('points[@{{index}}][value]', '@{{label}}' ) !!}
+            {!! Form::number('points[@{{index}}][value]', null, ['class'=>'form-control']) !!}
+            {!! Form::hidden('points[@{{index}}][game_point_id]', null, ['id'=>'points[@{{index}}][game_point_id]']) !!}
+        </div>
+    </script>
 @stop

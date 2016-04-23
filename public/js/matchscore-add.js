@@ -7,13 +7,28 @@ $(function(){
         return array;
     }
 
+    var pointTemplate = Handlebars.compile($('#template-game-point').html());
+
     var gamesInput = $('#game');
     var gamesIdInput = $('#game_id');
+    var numPlayersInput = $('#number_players');
+    var pointsContainer = $('#game-points');
     var addGameBtn = $('#add-game-btn');
     var addGameLink = addGameBtn.attr('href');
     var completeFormWithGame = function(id){
         addPlayerBtn.attr('href', addPlayerLink+'&withGameId='+id);
-        //TODO
+        $.getJSON($_SERVER.root+'/games/'+id+'.json', function(data){
+            numPlayersInput.attr('min', data.min_players);
+            numPlayersInput.attr('max', data.max_players);
+            pointsContainer.empty();
+            for(var i=0; i < data.game_points.length; i++){
+                pointsContainer.append(pointTemplate({
+                    index: i,
+                    label: data.game_points[i].label,
+                    game_point_id: data.game_points[i].id
+                }));
+            }
+        });
     };
 
     if(gamesIdInput.val() !== ""){
@@ -31,6 +46,7 @@ $(function(){
             change: function(event, ui){
                 if(!ui.item){
                     gamesInput.val('');
+                    pointsContainer.empty();
                 }
             }
         });

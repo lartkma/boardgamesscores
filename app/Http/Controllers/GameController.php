@@ -57,6 +57,24 @@ class GameController extends Controller {
 	//public function show($id) {
 		////
 	//}
+    
+    public function showJSON($id){
+        $game = Game::find($id);
+        return [
+            'id' => $game->id,
+            'name' => $game->name,
+            'bgg_id' => $game->bgg_id,
+            'min_players' => $game->min_players,
+            'max_players' => $game->max_players,
+            'game_points' => $game->game_points->sortBy('order')->map(function($item){
+                return [
+                    'id' => $item->id,
+                    'label' => $item->label,
+                    'is_negative' => $item->is_negative,
+                ];
+            }),
+        ];
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
