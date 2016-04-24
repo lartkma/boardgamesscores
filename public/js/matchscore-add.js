@@ -27,8 +27,7 @@ $(function(){
             for(var i=0; i < data.game_points.length; i++){
                 var pointForm = $(pointTemplate({
                     index: i,
-                    label: data.game_points[i].label,
-                    game_point_id: data.game_points[i].id
+                    label: data.game_points[i].label
                 }));
                 pointForm.find('input').attr('required', i === 0);
                 pointsContainer.append(pointForm);

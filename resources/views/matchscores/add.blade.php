@@ -50,7 +50,6 @@
         <div class="form-group">
             {!! Form::label('points[@{{index}}][value]', '@{{label}}' ) !!}
             {!! Form::number('points[@{{index}}][value]', null, ['class'=>'form-control']) !!}
-            {!! Form::hidden('points[@{{index}}][game_point_id]', null, ['id'=>'points[@{{index}}][game_point_id]']) !!}
         </div>
     </script>
 @stop
