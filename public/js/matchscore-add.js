@@ -9,12 +9,15 @@ $(function(){
 
     var pointTemplate = Handlebars.compile($('#template-game-point').html());
 
+    var addGameBtn = $('#add-game-btn');
+    var addGameLink = addGameBtn.attr('href');
+    var addPlayerBtn = $('#add-player-btn');
+    var addPlayerLink = addPlayerBtn.attr('href');
+
     var gamesInput = $('#game');
     var gamesIdInput = $('#game_id');
     var numPlayersInput = $('#number_players');
     var pointsContainer = $('#game-points');
-    var addGameBtn = $('#add-game-btn');
-    var addGameLink = addGameBtn.attr('href');
     var completeFormWithGame = function(id){
         addPlayerBtn.attr('href', addPlayerLink+'&withGameId='+id);
         $.getJSON($_SERVER.root+'/games/'+id+'.json', function(data){
@@ -22,11 +25,13 @@ $(function(){
             numPlayersInput.attr('max', data.max_players);
             pointsContainer.empty();
             for(var i=0; i < data.game_points.length; i++){
-                pointsContainer.append(pointTemplate({
+                var pointForm = $(pointTemplate({
                     index: i,
                     label: data.game_points[i].label,
                     game_point_id: data.game_points[i].id
                 }));
+                pointForm.find('input').attr('required', i === 0);
+                pointsContainer.append(pointForm);
             }
         });
     };
@@ -59,8 +64,6 @@ $(function(){
 
     var playersInput = $('#player');
     var playersIdInput = $('#player_id');
-    var addPlayerBtn = $('#add-player-btn');
-    var addPlayerLink = addPlayerBtn.attr('href');
     var completeFormWithPlayer = function(id){
         addGameBtn.attr('href', addGameLink+'&withPlayerId='+id);
     };
