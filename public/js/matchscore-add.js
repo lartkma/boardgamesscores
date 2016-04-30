@@ -53,6 +53,10 @@ $(function(){
                     pointsContainer.empty();
                 }
             }
+        }).focus(function(){
+            if(gamesInput.val() === ''){
+                gamesInput.autocomplete('search', '');
+            }
         });
     });
     gamesInput.keydown(function(event){
@@ -83,6 +87,10 @@ $(function(){
                 if(!ui.item){
                     playersInput.val('');
                 }
+            }
+        }).focus(function(){
+            if(playersInput.val() === ''){
+                playersInput.autocomplete('search', '');
             }
         });
     });
