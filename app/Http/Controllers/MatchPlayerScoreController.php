@@ -1,9 +1,11 @@
 <?php namespace BoardGameScores\Http\Controllers;
 
 use BoardGameScores\Http\Requests;
+use BoardGameScores\Http\Requests\StoreMatchPlayerScoreRequest;
 use BoardGameScores\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Lang;
 
 class MatchPlayerScoreController extends Controller {
 
@@ -30,8 +32,21 @@ class MatchPlayerScoreController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(){
-		//
+	public function store(StoreMatchPlayerScoreRequest $req){
+        $req->new_matchplayerscore()->save();
+        $req->new_matchplayerscore()->points()->saveMany(
+            $req->new_matchplayerscore_points());
+        $is_a_record = $req->new_matchplayerscore()->checkAndSaveForRecord();
+        if($is_a_record){
+            return redirect('/')->withSuccess(
+                Lang::get('matchscores.success_message_record', [
+                    'name' => $req->player()->name,
+                    'game' => $req->game()->name,
+                    'players_msg' => Lang::choice('matchscores.record_players', $req->num_players()),
+                ]));
+        }else{
+            return redirect('/')->withSuccess(Lang::get('matchscores.success_message'));
+        }
 	}
 
 	/**
